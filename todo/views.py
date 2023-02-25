@@ -28,3 +28,17 @@ def task_delete(request, pk):
     item.delete()
     messages.warning(request, 'Item Has Been Deleted')
     return redirect('home')
+
+
+def cross_off(request, pk):
+    item = Task.objects.get(pk=pk)
+    item.completed = True
+    item.save()
+    return redirect('home')
+
+
+def uncross(request, pk):
+    item = Task.objects.get(pk=pk)
+    item.completed = False
+    item.save()
+    return redirect('home')
