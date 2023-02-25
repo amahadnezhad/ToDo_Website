@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib import messages
 
@@ -21,3 +21,10 @@ def tasksview(request):  # Home
     else:
         items = Task.objects.all
         return render(request, 'home.html', {'items': items})
+
+
+def task_delete(request, pk):
+    item = Task.objects.get(pk=pk)
+    item.delete()
+    messages.warning(request, 'Item Has Been Deleted')
+    return redirect('home')

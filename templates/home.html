@@ -23,13 +23,13 @@
 				<tr class="table-secondary">
 					<td class="striker">{{ item.item }}</td>
 					<td><center>Uncross</center></td>
-					<td><center>Delete</center></td>
+					<td><center><a href="{% url 'delete' item.id %}">Delete</a></center></td>
 				</tr>
 			{% else %}
 				<tr>
 					<td>{{ item.item }}</td>
 					<td><center>Cross Off</center></td>
-					<td><center>Delete</center></td>
+					<td><center><a href="{% url 'delete' item.id %}">Delete</a></center></td>
 				</tr>
 			{% endif %}
 		{% endfor %}
