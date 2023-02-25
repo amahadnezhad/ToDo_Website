@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+
+{% block page_title %}Edit Item{% endblock page_title %}
+{% block content %}
+    <h1>Edit: </h1>
+    {% if item %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input class="form-control mt-3" type="search" placeholder="{{ item.item }}" value="{{ item.item }}"
+                   aria-label="Search" name="item">
+            <input type="hidden" value="{{ item.completed }}" name="completed">
+            <button class="btn btn-outline-secondary mt-3" type="submit">Add To List</button>
+        </form>
+    {% endif %}
+{% endblock content %}
