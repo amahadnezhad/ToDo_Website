@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+from django.contrib import messages
 
 from .models import Task
 from .forms import ListForm
@@ -15,7 +16,8 @@ def tasksview(request):  # Home
         if form.is_valid():
             form.save()
             items = Task.objects.all()
-            return render(request, 'home.html', {'items': 'items'})
-
-    items = Task.objects.all
-    return render(request, 'home.html', {'items': items})
+            messages.success(request, 'Item Has Been Added To List!')
+            return render(request, 'home.html', {'items': items})
+    else:
+        items = Task.objects.all
+        return render(request, 'home.html', {'items': items})

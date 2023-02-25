@@ -1,33 +1,39 @@
 {% extends '_base.html' %}
-{% load static %}
 
-{% block page_title %}Tasks{% endblock page_title %}
-
-{% block links %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock links %}
+{% block title %}ToDo List{% endblock %}
 
 {% block content %}
-    {% if items %}
-        {% for item in items %}
-            <table class="table table-bordered">
-                {% if item.completed %}
-                    <tr class="table-secondary">
-                        <td>{{ item }}</td>
-                        <td><center>{{ item.completed }}</center></td>
-                        <td><center>Delete</center></td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td>{{ item }}</td>
-                        <td><center>{{ item.completed }}</center></td>
-                        <td><center>Delete</center></td>
-                    </tr>
-                {% endif %}
-            </table>
-        {% endfor %}
 
-    {% endif %}
+{% if messages %}
+	{% for message in messages %}
+		<div class="alert alert-warning alert-dismissable" role="alert">
+			<button class="close" data-dismiss="alert">
+	            <small><sup>x</sup></small>
+	        </button>
+			{{ message }}
+		</div>
+	{% endfor%}
 
+{% endif %}
 
-{% endblock content %}
+	{% if items %}
+	<table class="table table-bordered">
+		{% for item in items %}
+			{% if item.completed %}
+				<tr class="table-secondary">
+					<td class="striker">{{ item.item }}</td>
+					<td><center>Uncross</center></td>
+					<td><center>Delete</center></td>
+				</tr>
+			{% else %}
+				<tr>
+					<td>{{ item.item }}</td>
+					<td><center>Cross Off</center></td>
+					<td><center>Delete</center></td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+	{% endif %}
+
+{% endblock %}
