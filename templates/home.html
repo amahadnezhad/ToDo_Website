@@ -1,14 +1,30 @@
 {% extends '_base.html' %}
+{% load static %}
 
 {% block page_title %}Tasks{% endblock page_title %}
-{% block content %}
-    <h1>Tasks</h1>
 
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock links %}
+
+{% block content %}
     {% if items %}
         {% for item in items %}
-            <ul>
-                <li>{{ item }}</li>
-            </ul>
+            <table class="table table-bordered">
+                {% if item.completed %}
+                    <tr class="table-secondary">
+                        <td>{{ item }}</td>
+                        <td><center>{{ item.completed }}</center></td>
+                        <td><center>Delete</center></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ item }}</td>
+                        <td><center>{{ item.completed }}</center></td>
+                        <td><center>Delete</center></td>
+                    </tr>
+                {% endif %}
+            </table>
         {% endfor %}
 
     {% endif %}
